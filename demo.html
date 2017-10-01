@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <!--<input type="file" id="ipt">-->
+  <input type="file" id="fileElem" multiple accept="image/*">
+  <img src="" alt="" id="img">
+  <script>
+    let img = document.querySelector('#img')
+    let read = new FileReader();
+    fileElem.addEventListener('change', function(e){
+      let file = this.files[0];
+      console.log(window.URL.createObjectURL(file))
+      img.src = window.URL.createObjectURL(file);
+      // 当图片加载完成后，清除内部缓存
+      img.onload = function() {
+        window.URL.revokeObjectURL(this.src)
+      }
+    },false)
+    // let readfiles = new FileReader();
+    // ipt.addEventListener('change', function () {
+    //   let files = this.files[0];
+    //   console.log(readfiles.readAsDataURL(files))
+    //   readfiles.onload = function (filePath) {
+    //     console.log(filePath)
+    //   }
+    // }, false)
+  </script>
+</body>
+
+</html>
